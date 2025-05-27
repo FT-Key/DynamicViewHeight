@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Comparación vh vs dvh</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vh-box {
+      background-color: lightcoral;
+      height: 100vh;
+      text-align: center;
+      padding-top: 2rem;
+      font-weight: bold;
+    }
+
+    .dvh-box {
+      background-color: lightseagreen;
+      height: 100dvh;
+      text-align: center;
+      padding-top: 2rem;
+      font-weight: bold;
+    }
+
+    .info {
+      padding: 1rem;
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="info">🔽 Scroll para ver el efecto (en móviles o modo responsive)</div>
+
+  <div class="vh-box">Caja con 100vh</div>
+
+  <div class="dvh-box">Caja con 100dvh</div>
+</body>
+
+</html>
