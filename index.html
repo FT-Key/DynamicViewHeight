@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>vh vs dvh - Vista en tiempo real</title>
@@ -20,14 +21,20 @@
       color: #fff;
       padding: 1rem;
       text-align: center;
+      font-size: 1rem;
     }
 
-    .vh-box, .dvh-box {
-      text-align: center;
-      padding-top: 2rem;
+    .vh-box,
+    .dvh-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       font-weight: bold;
       color: white;
       position: relative;
+      text-align: center;
+      font-size: 2rem;
     }
 
     .vh-box {
@@ -41,33 +48,34 @@
     }
 
     .height-display {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.4);
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.9rem;
+      margin-top: 1rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 1.5rem;
     }
 
     .input-container {
-      margin-top: 2rem;
+      margin: 3rem 0;
       text-align: center;
     }
 
     input {
-      padding: 0.5rem;
-      font-size: 1rem;
+      padding: 0.75rem;
+      font-size: 1.2rem;
       width: 80%;
       max-width: 400px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
     }
   </style>
 </head>
+
 <body>
 
   <div class="info">
     🔍 Tocá el input para mostrar el teclado en móvil.<br>
-    👁️ Mirá cómo cambian los valores de altura real abajo a la izquierda.
+    👁️ Mirá cómo cambian las alturas reales.
   </div>
 
   <div class="vh-box">
@@ -81,7 +89,7 @@
   </div>
 
   <div class="input-container">
-    <p>🧪 Tocá el input:</p>
+    <p>🧪 Tocá el input para abrir el teclado:</p>
     <input type="text" placeholder="Escribí algo...">
   </div>
 
@@ -96,13 +104,12 @@
       dvhText.textContent = `Altura: ${dvhBox.getBoundingClientRect().height.toFixed(0)} px`;
     }
 
-    // Actualizar cuando cambia el tamaño del viewport (teclado, barra, rotación, etc.)
     window.addEventListener('resize', updateHeights);
     window.addEventListener('orientationchange', updateHeights);
     window.addEventListener('DOMContentLoaded', updateHeights);
-    setInterval(updateHeights, 300); // chequeo constante por si hay cambios sin resize
-
+    setInterval(updateHeights, 300);
   </script>
 
 </body>
+
 </html>
