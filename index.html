@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>vh vs dvh vs teclado</title>
+  <title>vh vs dvh - Vista en tiempo real</title>
   <style>
     * {
       margin: 0;
@@ -12,7 +12,7 @@
 
     body {
       font-family: sans-serif;
-      height: 200vh; /* permite scroll para activar/desactivar barra */
+      height: 200vh;
     }
 
     .info {
@@ -27,6 +27,7 @@
       padding-top: 2rem;
       font-weight: bold;
       color: white;
+      position: relative;
     }
 
     .vh-box {
@@ -37,6 +38,16 @@
     .dvh-box {
       background-color: darkcyan;
       height: 100dvh;
+    }
+
+    .height-display {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.9rem;
     }
 
     .input-container {
@@ -55,22 +66,43 @@
 <body>
 
   <div class="info">
-    📱 Probar en móvil: hacé scroll, tocá el input para mostrar el teclado<br>
-    🔄 Observá si alguna de las cajas se corta o cambia
+    🔍 Tocá el input para mostrar el teclado en móvil.<br>
+    👁️ Mirá cómo cambian los valores de altura real abajo a la izquierda.
   </div>
 
   <div class="vh-box">
     Caja con <strong>100vh</strong>
+    <div class="height-display" id="vhHeight">Altura: -- px</div>
   </div>
 
   <div class="dvh-box">
     Caja con <strong>100dvh</strong>
+    <div class="height-display" id="dvhHeight">Altura: -- px</div>
   </div>
 
   <div class="input-container">
-    <p>🧪 Tocá el input para mostrar el teclado:</p>
+    <p>🧪 Tocá el input:</p>
     <input type="text" placeholder="Escribí algo...">
   </div>
+
+  <script>
+    const vhBox = document.querySelector('.vh-box');
+    const dvhBox = document.querySelector('.dvh-box');
+    const vhText = document.getElementById('vhHeight');
+    const dvhText = document.getElementById('dvhHeight');
+
+    function updateHeights() {
+      vhText.textContent = `Altura: ${vhBox.getBoundingClientRect().height.toFixed(0)} px`;
+      dvhText.textContent = `Altura: ${dvhBox.getBoundingClientRect().height.toFixed(0)} px`;
+    }
+
+    // Actualizar cuando cambia el tamaño del viewport (teclado, barra, rotación, etc.)
+    window.addEventListener('resize', updateHeights);
+    window.addEventListener('orientationchange', updateHeights);
+    window.addEventListener('DOMContentLoaded', updateHeights);
+    setInterval(updateHeights, 300); // chequeo constante por si hay cambios sin resize
+
+  </script>
 
 </body>
 </html>
